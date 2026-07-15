@@ -154,6 +154,10 @@ function setupModeration(client) {
           try {
             const muteRole = await ensureMuteRole(message.guild);
             await target.roles.add(muteRole);
+            const memberRole = message.guild.roles.cache.get("1329488914192535584");
+        if (memberRole && target.roles.cache.has(memberRole.id)) {
+            await target.roles.remove(memberRole);
+        }
             await target.send(`Vous avez été mute du serveur par un modérateur pour la raison suivante : ${reason}`).catch(() => {});
             await addInfraction(target.id, 'mute', reason, message.author.id).catch(console.error);
             message.channel.send(`${target.user.tag} a été mute pour la raison suivante : ${reason}.`);
@@ -178,12 +182,20 @@ function setupModeration(client) {
           try {
             const muteRole = await ensureMuteRole(message.guild);
             await target.roles.add(muteRole);
+            const memberRole = message.guild.roles.cache.get("1329488914192535584");
+        if (memberRole && target.roles.cache.has(memberRole.id)) {
+            await target.roles.remove(memberRole);
+        }
             await target.send(`Vous avez été temporairement mute du serveur par un modérateur pour la raison suivante : ${reason}`).catch(() => {});
             await addInfraction(target.id, 'mute', `[${args[1]}] ${reason}`, message.author.id).catch(console.error);
             message.channel.send(`${target.user.tag} est mute pour ${args[1]} pour la raison suivante : ${reason}.`);
             setTimeout(async () => {
               try {
                 await target.roles.remove(muteRole);
+                const memberRole = message.guild.roles.cache.get("1329488914192535584");
+        if (memberRole && !target.roles.cache.has(memberRole.id)) {
+                await target.roles.add(memberRole);
+        }
                 await clearInfractions(target.id, 'mute').catch(console.error);
               } catch (err) {
                 console.error(`[Moderation] Erreur lors du unmute automatique de ${target.user.tag}:`, err);
@@ -203,7 +215,14 @@ function setupModeration(client) {
           console.log(`[Moderation] unmute: ${message.author.tag} unmute ${target.user.tag}`);
           try {
             const muteRole = await ensureMuteRole(message.guild);
+        if (!target.roles.cache.has(muteRole.id)) {
+            return message.reply("❌ Cet utilisateur n'est pas mute.");
+        }
             await target.roles.remove(muteRole);
+            const memberRole = message.guild.roles.cache.get("1329488914192535584");
+        if (memberRole && !target.roles.cache.has(memberRole.id)) {
+            await target.roles.add(memberRole);
+        }
             await clearInfractions(target.id, 'mute').catch(console.error);
             await target.send("Vous avez été unmute du serveur.").catch(() => {});
             message.channel.send(`${target.user.tag} a été unmute.`);
