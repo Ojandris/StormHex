@@ -104,13 +104,13 @@ module.exports = (client) => {
       case "help": {
         return message.reply(
           "**Commandes disponibles :**\n" +
-            "`!vocal rename [nom]` — Renomme ton salon vocal personnel.\n" +
-            "`!vocal kick [@utilisateur]` — Expulse un utilisateur de ton salon vocal.\n" +
-            "`!vocal transfert [@utilisateur]` — Transfère la propriété du salon.\n" +
-            "`!vocal limit [nombre]` — Limite le nombre de participants dans ton salon.\n" +
-            "`!vocal lock` — Verrouille l'accès à ton salon.\n" +
-            "`!vocal unlock` — Déverrouille l'accès à ton salon.\n" +
-            "`!vocal help` — Affiche cette aide."
+            "`?vocal rename [nom]` — Renomme ton salon vocal personnel.\n" +
+            "`?vocal kick [@utilisateur]` — Expulse un utilisateur de ton salon vocal.\n" +
+            "`?vocal transfert [@utilisateur]` — Transfère la propriété du salon.\n" +
+            "`?vocal limit [nombre]` — Limite le nombre de participants dans ton salon.\n" +
+            "`?vocal lock` — Verrouille l'accès à ton salon.\n" +
+            "`?vocal unlock` — Déverrouille l'accès à ton salon.\n" +
+            "`?vocal help` — Affiche cette aide."
         );
       }
       case "kick": {
@@ -203,7 +203,7 @@ module.exports = (client) => {
         }
       }
       default:
-        return message.reply("Commande inconnue. Utilise `!vocal help` pour la liste des commandes.");
+        return message.reply("Commande inconnue. Utilise `?vocal help` pour la liste des commandes.");
     }
   });
 };
