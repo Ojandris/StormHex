@@ -66,7 +66,7 @@ module.exports = (client) => {
     if (!message.guild || message.author.bot) return;
 
     const content = message.content.trim();
-    if (!content.startsWith("!vocal ")) return;
+    if (!content.startsWith("?vocal ")) return;
 
     const [cmd, sub, ...args] = content.split(/\s+/);
 
