@@ -82,7 +82,7 @@ module.exports = (client) => {
 
     // Vérifier que l'utilisateur a bien les droits de gérer son salon
     const isOwner = userChannel
-      .permissionsFor(message.author.id)
+      .permissionsFor(message.member)
       ?.has(PermissionsBitField.Flags.ManageChannels);
 
     if (!isOwner) {
