@@ -83,7 +83,7 @@ const rest = new REST({ version: '10' }).setToken(token);
 
 // ----------- Event Ready -----------
 
-client.once('ready', () => {
+client.once('clientReady', () => {
     console.log(`Connecté en tant que ${client.user.tag}`);
 
     setInterval(async () => {
