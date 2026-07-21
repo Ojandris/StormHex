@@ -85,6 +85,12 @@ const rest = new REST({ version: '10' }).setToken(token);
 
 client.once('ready', () => {
     console.log(`Connecté en tant que ${client.user.tag}`);
+
+    setInterval(async () => {
+        const memberCount = client.guilds.cache.reduce((a, g) => a + g.memberCount, 0);
+
+        client.user.setActivity(`${memberCount} membres`, { type: 'WATCHING' });
+    }, 30000);
 });
 
 // ----------- Gérer les interactions slash -----------
